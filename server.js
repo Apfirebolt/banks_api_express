@@ -2,6 +2,7 @@ import path from 'path'
 import express from 'express'
 import dotenv from 'dotenv'
 import morgan from 'morgan'
+import cors from 'cors'
 // swagger docs
 import swaggerUi from 'swagger-ui-express'
 import swaggerJSDoc from 'swagger-jsdoc'
@@ -21,7 +22,14 @@ if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'))
 }
 
+const corsOptions = {
+  origin: 'http://localhost:4000', // Cors for svelte app running on port 4000
+  credentials: true, // Allow cookies for cross-origin requests (if needed)
+  optionSuccessStatus: 200, // Optional: Set the HTTP status code for preflight requests
+};
+
 app.use(express.json())
+app.use(cors(corsOptions)); 
 
 // Swagger docs
 const swaggerOptions = {
@@ -43,6 +51,8 @@ const swaggerDocs = swaggerJSDoc(swaggerOptions)
 app.use('/api/users', userRoutes)
 app.use('/api/banks', bankRoutes)
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
+
+ // Apply CORS middleware to all routes
 
 const __dirname = path.resolve()
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
