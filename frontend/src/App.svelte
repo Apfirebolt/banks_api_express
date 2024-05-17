@@ -5,21 +5,21 @@
   import { Router, Link, Route } from "svelte-routing";
   import Banks from "./routes/Banks.svelte";
   import Home from "./routes/Home.svelte";
+  import Header from "./components/header.svelte";
+  import Footer from "./components/footer.svelte";
 
   export let url = "";
 </script>
 
 <main>
   <Router {url}>
-    <nav>
-      <Link to="/">Home</Link>
-      <Link to="/banks">Banks</Link>
-    </nav>
+    <Header />
     <div>
       <Route path="/banks" component={Banks} />
       <Route path="/"><Home /></Route>
     </div>
   </Router>
+  <Footer />
 </main>
 
 <style>

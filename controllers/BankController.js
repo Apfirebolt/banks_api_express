@@ -7,7 +7,7 @@ import Bank from "../models/Bank.js";
 const getBanks = asyncHandler(async (req, res) => {
   // get banks and show 50 results per page
   const pageSize = 50;
-  const page = Number(req.query.pageNumber) || 1;
+  const page = Number(req.query.page) || 1;
 
   // search keyword on name, city, and branch
   const keyword = req.query.keyword
