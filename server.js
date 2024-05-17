@@ -2,6 +2,9 @@ import path from 'path'
 import express from 'express'
 import dotenv from 'dotenv'
 import morgan from 'morgan'
+// swagger docs
+import swaggerUi from 'swagger-ui-express'
+import swaggerJSDoc from 'swagger-jsdoc'
 import { notFound, errorHandler } from './middleware/Error.js'
 import connectDB from './config/db.js'
 
@@ -20,8 +23,26 @@ if (process.env.NODE_ENV === 'development') {
 
 app.use(express.json())
 
+// Swagger docs
+const swaggerOptions = {
+  swaggerDefinition: {
+    info: {
+      title: 'Bank API',
+      description: 'Bank API Information',
+      contact: {
+        name: 'Amazing Developer',
+      },
+      servers: ['http://localhost:5000'],
+    },
+  },
+  apis: ['./routes/*.js'],
+}
+
+const swaggerDocs = swaggerJSDoc(swaggerOptions)
+
 app.use('/api/users', userRoutes)
 app.use('/api/banks', bankRoutes)
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 
 const __dirname = path.resolve()
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
