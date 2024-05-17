@@ -16,7 +16,8 @@ import axios from "axios";
 
 <div>
   <!-- Add your component markup here -->
-  <h2>
+  <button class="btn">Hello daisyui</button>
+  <h2 class="bg-slate-300 text-gray-800 text-center py-3">
     Banks Page
   </h2>
   {#each banks as bank}
