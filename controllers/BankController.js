@@ -9,12 +9,14 @@ const getBanks = asyncHandler(async (req, res) => {
   const pageSize = 50;
   const page = Number(req.query.pageNumber) || 1;
 
+  // search keyword on name, city, and branch
   const keyword = req.query.keyword
     ? {
-        name: {
-          $regex: req.query.keyword,
-          $options: "i",
-        },
+        $or: [
+          { name: { $regex: req.query.keyword, $options: "i" } },
+          { city: { $regex: req.query.keyword, $options: "i" } },
+          { branch: { $regex: req.query.keyword, $options: "i" } },
+        ],
       }
     : {};
 

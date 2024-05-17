@@ -100,6 +100,3 @@ Please take a moment to review guidelines [PR](.github/pull_request_template.md)
 
 # Properties of Banks
 
-['BANK', 'IFSC', 'BRANCH', 'CENTRE', 'DISTRICT', 'STATE', 'ADDRESS',
-       'CONTACT', 'IMPS', 'RTGS', 'CITY', 'ISO3166', 'NEFT', 'MICR', 'UPI',
-       'SWIFT']
