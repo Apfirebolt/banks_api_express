@@ -4,6 +4,7 @@
 
   let banks = [];
   let currentPage = 1;
+  let pageWindow = [];
   let lastPage = 100;
 
   onMount(async () => {
@@ -30,8 +31,9 @@
 
 <div>
   <!-- Add your component markup here -->
-  <h2 class="bg-slate-300 text-gray-800 text-center py-3">Banks Page - {currentPage}</h2>
-  {#each banks as bank}
+  <h2 class="text-gray-800 text-center my-3 text-3xl font-bold">Banks</h2>
+  <div class="grid grid-cols-2 gap-4 container mx-auto">
+    {#each banks as bank}
     <div class="container mx-auto bg-cyan-700 px-2 py-4 text-white">
       <h3>{bank.name}</h3>
       <p>{bank.address}</p>
@@ -40,6 +42,9 @@
       </p>
     </div>
   {/each}
+  </div>
+
+  
 
   <div class="container mx-auto my-3">
     <div class="join">
@@ -55,16 +60,14 @@
       {/each}
       <button class="join-item btn btn-disabled">...</button>
       
-      <!-- run a loop lastPage - 5 to lastPage -->
-      {#each Array.from({ length: 5 }, (_, i) => lastPage - i).filter(page => page > 5) as page}
-        <button
-            class="join-item btn"
-            class:btn-primary={currentPage === page}
-            on:click={() => goToPage(page)}
-          >
-          {page}
-        </button>
-      {/each}
+      <!--last page -->
+      <button
+        class="join-item btn"
+        class:btn-primary={currentPage === lastPage}
+        on:click={() => goToPage(lastPage)}
+      >
+      {lastPage}
+      </button>
     </div>
   </div>
 </div>
