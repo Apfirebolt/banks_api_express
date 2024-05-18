@@ -1,6 +1,7 @@
 <script>
   import { onMount } from "svelte";
   import axios from "axios";
+  import App from "../App.svelte";
 
   let banks = [];
   let currentPage = 1;
@@ -12,6 +13,13 @@
       const response = await axios.get("http://localhost:3000/api/banks");
       banks = response.data.banks;
       lastPage = response.data.pages;
+
+      // create a window of 10 pages, first 4 pages, ... and last 4 pages
+      if (lastPage <= 10) {
+        pageWindow = Array.from({ length: lastPage }, (_, i) => i + 1);
+      } else {
+        pageWindow = [1, 2, 3, 4, "...", lastPage - 3, lastPage - 2, lastPage - 1, lastPage];
+      }
     } catch (error) {
       console.error(error);
     }
@@ -25,6 +33,17 @@
     if (response) {
       banks = response.data.banks;
       lastPage = response.data.pages;
+
+      // update the page window, first 4 pages should be currentPage - 1, currentPage, currentPage + 1, currentPage + 2
+      if (lastPage <= 10) {
+        pageWindow = Array.from({ length: lastPage }, (_, i) => i + 1);
+      } else if (currentPage <= 5) {
+        pageWindow = [1, 2, 3, 4, "...", lastPage - 3, lastPage - 2, lastPage - 1, lastPage];
+      } else if (currentPage >= lastPage - 4) {
+        pageWindow = [1, 2, 3, 4, "...", lastPage - 3, lastPage - 2, lastPage - 1, lastPage];
+      } else {
+        pageWindow = [1, "...", currentPage - 1, currentPage, currentPage + 1, currentPage + 2, "...", lastPage];
+      }
     }
   }
 </script>
@@ -44,30 +63,31 @@
   {/each}
   </div>
 
-  
-
-  <div class="container mx-auto my-3">
+  <div class="container mx-auto my-3 flex">
     <div class="join">
       <!--first 4 pages -->
-      {#each Array.from({ length: 5 }, (_, i) => currentPage + i).filter(page => page <= lastPage) as page}
-        <button
-            class="join-item btn"
-            class:btn-primary={currentPage === page}
-            on:click={() => goToPage(page)}
-          >
-          {page}
-        </button>
-      {/each}
-      <button class="join-item btn btn-disabled">...</button>
-      
-      <!--last page -->
+      {#each pageWindow as page}
       <button
         class="join-item btn"
-        class:btn-primary={currentPage === lastPage}
-        on:click={() => goToPage(lastPage)}
+        class:btn-primary={currentPage === page}
+        on:click={() => goToPage(page)}
+        disabled={page === "..." || currentPage === page}
       >
-      {lastPage}
+        {page}
       </button>
+      {/each}  
+    </div>
+    <!-- Input box to go to any page -->
+    <div class="mx-4">
+      <label for="page" class="join-item text-cyan-700 font-semibold">Go to page</label>
+      <input
+        type="number"
+        class="shadow appearance-none border border-cyan-700 rounded py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+        min="1"
+        max={lastPage}
+        bind:value={currentPage}
+        on:change={() => goToPage(currentPage)}
+      />
     </div>
   </div>
 </div>
