@@ -1,4 +1,6 @@
 <script>
+  import { onMount } from "svelte";
+  import { count, increment, decrement, getBanks } from '../store/bank.js';
 </script>
 
 <footer>
@@ -8,6 +10,15 @@
     >
       <span class="block sm:inline">&copy; 2024 Banks API Inc.</span>
       <span class="block sm:inline">All rights reserved.</span>
+      <span class="block sm:inline">Built with SvelteKit</span>
+      <span class="block sm:inline">| {$count}</span>
+      <button on:click={increment} class="bg-green-700 text-white p-2 my-3">
+        Increment
+      </button>
+      <button on:click={decrement} class="bg-green-700 text-white p-2 my-3">
+        Decrement
+      </button>
+      <!-- print all banks in loop -->
     </div>
   </div>
 </footer>

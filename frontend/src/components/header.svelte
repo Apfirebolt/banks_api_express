@@ -51,13 +51,13 @@
         <li>
           <Link
             to="/"
-            class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500"
+            class="block bg-neutral-100 shadow-md p-2 text-white rounded md:bg-transparent md:text-blue-700 dark:text-white md:dark:text-blue-500"
             aria-current="page">Home</Link>
         </li>
         <li>
           <Link
             to="/banks"
-            class="lock py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500"
+            class="block p-2 bg-neutral-100 shadow-md rounded md:bg-transparent md:text-blue-700 dark:text-white md:dark:text-blue-500"
             >Banks</Link>
         </li>
       </ul>

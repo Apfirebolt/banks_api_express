@@ -167,9 +167,9 @@
   <div class="grid grid-cols-2 gap-4 container mx-auto">
     {#each banks as bank}
       <div class="container mx-auto bg-cyan-700 px-2 py-4 text-white">
-        <h3>{bank.name}</h3>
+        <h3 class="bg-blue-900 px-2 py-3 my-2">{bank.name}</h3>
         <p>{bank.address}</p>
-        <p>
+        <p class="bg-blue-900 px-2 py-3 my-2">
           {bank.city}, {bank.state}
           {bank.contact}
         </p>
