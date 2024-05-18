@@ -1,6 +1,6 @@
 <script>
   import { onMount } from "svelte";
-  import { count, increment, decrement, getBanks } from '../store/bank.js';
+  import { count, increment, decrement } from '../store/bank.js';
 </script>
 
 <footer>

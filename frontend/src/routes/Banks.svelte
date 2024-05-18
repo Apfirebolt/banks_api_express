@@ -1,6 +1,6 @@
 <script>
   import { onMount } from "svelte";
-  import axios from "axios";
+import httpClient from "../plugins/interceptor";
 
   let banks = [];
   let currentPage = 1;
@@ -10,7 +10,7 @@
 
   onMount(async () => {
     try {
-      const response = await axios.get("http://localhost:3000/api/banks");
+      const response = await httpClient.get("banks");
       banks = response.data.banks;
       lastPage = response.data.pages;
 
@@ -36,8 +36,8 @@
   });
 
   const searchBanks = async () => {
-    const response = await axios.get(
-      `http://localhost:3000/api/banks?keyword=${search}`
+    const response = await httpClient.get(
+      `banks?keyword=${search}`
     );
     if (response) {
       banks = response.data.banks;
@@ -64,8 +64,8 @@
   const goToPage = async (page) => {
     // set the value of the current page
     currentPage = page;
-    const response = await axios.get(
-      `http://localhost:3000/api/banks?page=${page}&keyword=${search}`
+    const response = await httpClient.get(
+      `banks?page=${page}&keyword=${search}`
     );
 
     if (response) {

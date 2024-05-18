@@ -1,9 +1,8 @@
 import { writable } from "svelte/store";
+import httpClient from "../plugins/interceptor";
 
 export const count = writable(0);
-export const banks = writable([
-    'ABC', 'XYZ', 'HDFC'
-]);
+export const banks = writable([]);
 export const loader = writable(false);
 
 export function increment() {
@@ -22,8 +21,12 @@ export function setLoading(data) {
   loader.set(data);
 }
 
-export function getBanks() { 
-  return banks;
+export async function getBankData(page = 1, search = '') {
+  const response = await httpClient.get(`banks?page=${page}&search=${search}`);
+  if (response.status === 200) {
+    console.log('Ok response', response.data.banks)
+    setBank(response.data.banks);
+  }
 }
 
 export function reset() {
@@ -31,3 +34,4 @@ export function reset() {
   banks.set([]);
   loader.set(false);
 }
+

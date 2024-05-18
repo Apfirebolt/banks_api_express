@@ -60,6 +60,12 @@
             class="block p-2 bg-neutral-100 shadow-md rounded md:bg-transparent md:text-blue-700 dark:text-white md:dark:text-blue-500"
             >Banks</Link>
         </li>
+        <li>
+          <Link
+            to="/store"
+            class="block p-2 bg-neutral-100 shadow-md rounded md:bg-transparent md:text-blue-700 dark:text-white md:dark:text-blue-500"
+            >Store</Link>
+        </li>
       </ul>
     </div>
   </div>
