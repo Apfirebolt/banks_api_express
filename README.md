@@ -4,6 +4,9 @@ _👀 Banks API having IFSC code of Banks in India
 
 ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
 ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
+![Svelte](https://img.shields.io/badge/svelte-%23ff3e00.svg?style=for-the-badge&logo=svelte&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/tailwind%20css-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![DaisyUI](https://img.shields.io/badge/daisyui-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
 ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
 
 This application contains data of around 160K banks in India with fields such as name, branch, ifsc code, state, contact and district.
@@ -131,19 +134,17 @@ npm install
 npm start
 ```
 
-The Express app is configured to run by default on port 3000 but can be easily changed by tweaking server.js file
+The Express app is configured to run by default on port 3000 but can be easily changed by tweaking server.js file. The front-end Svelte app is configured to run on port 4000 by default
 
 ## Features
 
 - User authentication 📦
-- 
-- Recipes can have multiple images 🍗
-- Recipes can have multiple steps 🚶
-- Recipes can have multiple ingredients 🔖
+- Search banks by city, branch and state
+- Svelte animations and store
 
 ## API Docs
 
-Detailed documentation for this API is not available yet, but below you can find some sample end points from the server.js file.
+Swagger docs with decorators are used for generating docs of some of the end-points of the application
 
 ```
 app.use('/api/users', userRoutes)
