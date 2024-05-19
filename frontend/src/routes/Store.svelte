@@ -2,27 +2,42 @@
   import { onMount } from "svelte";
   import { fade, slide, crossfade, fly } from "svelte/transition";
   import { getBankData, banks } from "../store/bank";
+  import { user } from "../store/auth"
 
   let show = true;
-  let isFlipped = false;
+  let userData = {};
 
   onMount(async () => {
     try {
+      const unsubscribe = user.subscribe((value) => {
+        userData = value;
+      });
+      // Do something with the current value here
       await getBankData();
+      return unsubscribe();
     } catch (error) {
       console.error(error);
     }
   });
 </script>
 
-<div>
+<div transition:fade>
   <!-- Add your component markup here -->
   <h2 class="text-gray-800 text-center my-3 text-3xl font-bold">Banks Store</h2>
   <div>
     <div class="container mx-auto flex justify-between items-center my-5">
-      <p class="text-center text-cyan-700 font-semibold text-lg">
-        List of banks in India
-      </p>
+      <div>
+        <p class="text-center text-cyan-700 font-semibold text-lg">
+          List of banks in India
+        </p>
+  
+        <!-- if user data is present then print email -->
+        {#if userData.email}
+          <p class="text-center ml-3 text-cyan-700 font-semibold text-lg">
+            Hello {userData.email}
+          </p>
+        {/if}
+      </div>
 
       <button
         class="bg-cyan-500 hover:bg-cyan-800 text-white font-bold py-2 px-4 rounded"
