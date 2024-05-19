@@ -1,11 +1,29 @@
 <script>
+    import { login } from "../store/auth";
     let email = '';
     let password = '';
+    let errors = [];
 
     function handleSubmit() {
         // Handle form submission here
         console.log('Email:', email);
         console.log('Password:', password);
+        errors = [];
+        // email and password are required
+        if (!email) {
+            errors.push('Email is required');
+        }
+
+        if (!password) {
+            errors.push('Password is required');
+        }
+
+        if (errors.length > 0) {
+            console.log('Errors:', errors);
+
+        } else {
+            login({ email, password });
+        }
     }
 </script>
 
@@ -15,6 +33,17 @@
         <p>
             Create an account or sign in to continue.
         </p>
+        <!-- loop over errors here -->
+        {#if errors.length > 0}
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 my-2 rounded relative" role="alert">
+                <strong class="font-bold">Errors:</strong>
+                <ul>
+                    {#each errors as error}
+                        <li>{error}</li>
+                    {/each}
+                </ul>
+            </div>
+        {/if}
         <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" on:submit|preventDefault={handleSubmit}>
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="email">

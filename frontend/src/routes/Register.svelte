@@ -1,4 +1,5 @@
 <script>
+    import { register } from "../store/auth";
 
     let email = '';
     let username = '';
@@ -9,7 +10,7 @@
         // Handle form submission here
         console.log('Email:', email);
         console.log('Password:', password);
-
+        errors = [];
         // email and password are required
         if (!email) {
             errors.push('Email is required');
@@ -20,11 +21,10 @@
         }
 
         if (errors.length > 0) {
-            errors.forEach((error) => {
-                console.error(error);
-            });
+            console.log('Errors:', errors);
+
         } else {
-            console.log('No errors');
+            register({ email, username, password });
         }
     }
 </script>
@@ -35,11 +35,9 @@
         <p>
             Create an account or sign in to continue.
         </p>
-        {errors.length} Errors are
-        <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" on:submit|preventDefault={handleSubmit}>
-            <!-- Display errors here -->
-            {#if errors.length > 0}
-            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+        <!-- loop over errors here -->
+        {#if errors.length > 0}
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 my-2 rounded relative" role="alert">
                 <strong class="font-bold">Errors:</strong>
                 <ul>
                     {#each errors as error}
@@ -47,7 +45,10 @@
                     {/each}
                 </ul>
             </div>
-            {/if}
+        {/if}
+        <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" on:submit|preventDefault={handleSubmit}>
+            <!-- Display errors here -->
+            
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
                     Email
