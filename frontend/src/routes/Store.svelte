@@ -1,9 +1,10 @@
 <script>
   import { onMount } from "svelte";
-  import { fade } from "svelte/transition";
+  import { fade, slide, crossfade, fly } from "svelte/transition";
   import { getBankData, banks } from "../store/bank";
 
   let show = true;
+  let isFlipped = false;
 
   onMount(async () => {
     try {
@@ -34,7 +35,7 @@
 
   <!-- print all banks -->
   {#if show}
-    <div transition:fade class="container mx-auto">
+    <div transition:fly class="container mx-auto">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <!-- loop over bankData.banks -->
         {#each $banks as bank}
@@ -52,5 +53,5 @@
 </div>
 
 <style>
-  /* Add your component styles here */
+  
 </style>

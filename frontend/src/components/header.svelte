@@ -50,6 +50,18 @@
       >
         <li>
           <Link
+            to="/login"
+            class="block bg-neutral-100 shadow-md p-2 text-white rounded md:bg-transparent md:text-blue-700 dark:text-white md:dark:text-blue-500"
+            aria-current="page">Login</Link>
+        </li>
+        <li>
+          <Link
+            to="/register"
+            class="block bg-neutral-100 shadow-md p-2 text-white rounded md:bg-transparent md:text-blue-700 dark:text-white md:dark:text-blue-500"
+            aria-current="page">Register</Link>
+        </li>
+        <li>
+          <Link
             to="/"
             class="block bg-neutral-100 shadow-md p-2 text-white rounded md:bg-transparent md:text-blue-700 dark:text-white md:dark:text-blue-500"
             aria-current="page">Home</Link>

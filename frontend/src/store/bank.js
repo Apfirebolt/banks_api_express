@@ -24,7 +24,6 @@ export function setLoading(data) {
 export async function getBankData(page = 1, search = '') {
   const response = await httpClient.get(`banks?page=${page}&search=${search}`);
   if (response.status === 200) {
-    console.log('Ok response', response.data.banks)
     setBank(response.data.banks);
   }
 }
