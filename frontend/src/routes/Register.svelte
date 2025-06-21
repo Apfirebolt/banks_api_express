@@ -7,9 +7,6 @@
     let errors = [];
 
     function handleSubmit() {
-        // Handle form submission here
-        console.log('Email:', email);
-        console.log('Password:', password);
         errors = [];
         // email and password are required
         if (!email) {

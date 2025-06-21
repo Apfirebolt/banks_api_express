@@ -16,7 +16,9 @@
   <Router {url}>
     <Layout>
       <Route path="/banks" component={Banks} />
-      <Route path="/banks/:id" component={BankDetail} />
+      <Route path="/banks/:id" let:params>
+        <BankDetail id={params.id} />
+      </Route>
       <Route path="/store" component={Store} />
       <Route path="/login" component={Login} />
       <Route path="/register" component={Register} />

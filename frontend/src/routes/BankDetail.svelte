@@ -9,21 +9,23 @@
     let bankId;
     const location = useLocation();
 
-    onMount(async () => {
-        // Get bank ID from URL parameters
+    export let id;
 
-        if ($location && $location.params && $location.params.id) {
-            bankId = $location.params.id;
-        }
-        
+    onMount(async () => {
+
+        bankId = id;
         try {
             const response = await httpClient.get(`banks/${bankId}`);
-            bank = response.data.bank;
+            bank = response.data;
             loading = false;
         } catch (err) {
-            error = "Failed to load bank details";
+            console.error("Error fetching bank details:", err);
+            error = "Failed to load bank details. Please try again later.";
             loading = false;
-            console.error(err);
+        }
+        if (!bank) {
+            error = "Bank not found.";
+            loading = false;
         }
     });
 </script>

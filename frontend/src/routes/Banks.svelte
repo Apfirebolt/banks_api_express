@@ -184,7 +184,7 @@
           {bank.city}, {bank.state}
           {bank.contact}
 
-          <Link to={`/banks/${bank.id}`} class="text-cyan-700 hover:text-cyan-800 underline">
+          <Link to={`/banks/${bank._id}`} class="text-cyan-700 hover:text-cyan-800 underline">
             View Details
           </Link>
         </div>
