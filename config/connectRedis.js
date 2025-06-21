@@ -3,10 +3,10 @@ import { createClient } from "redis";
 
 // Connect to Redis
 const client = createClient({
-    host: "redis", // Change to your Redis host if needed
-    port: 6380
-    // host: "localhost",
-    // port: 6379,
+    // host: "redis", // Change to your Redis host if needed
+    // port: 6379
+    host: "localhost",
+    port: 6379,
 });
 
 // Handle connection errors

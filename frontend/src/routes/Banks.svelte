@@ -1,6 +1,7 @@
 <script>
   import { onMount } from "svelte";
-import httpClient from "../plugins/interceptor";
+  import { Link } from "svelte-routing";
+  import httpClient from "../plugins/interceptor";
 
   let banks = [];
   let currentPage = 1;
@@ -36,9 +37,7 @@ import httpClient from "../plugins/interceptor";
   });
 
   const searchBanks = async () => {
-    const response = await httpClient.get(
-      `banks?keyword=${search}`
-    );
+    const response = await httpClient.get(`banks?keyword=${search}`);
     if (response) {
       banks = response.data.banks;
       lastPage = response.data.pages;
@@ -119,7 +118,9 @@ import httpClient from "../plugins/interceptor";
   <!-- Add your component markup here -->
   <h2 class="text-gray-800 text-center my-3 text-3xl font-bold">Banks</h2>
   <div class="container mx-auto flex justify-between items-center my-5">
-    <p class="text-center text-cyan-700 font-semibold text-lg">List of banks in India</p>
+    <p class="text-center text-cyan-700 font-semibold text-lg">
+      List of banks in India
+    </p>
 
     <div class="w-1/2">
       <label
@@ -167,19 +168,25 @@ import httpClient from "../plugins/interceptor";
   <div class="grid grid-cols-2 gap-4 container mx-auto">
     {#each banks as bank}
       <div
-        class="block rounded-lg bg-neutral-100 text-center text-surface shadow-secondary-1 dark:bg-surface-dark dark:text-white">
+        class="block rounded-lg bg-neutral-100 text-center text-surface shadow-secondary-1 dark:bg-surface-dark dark:text-white"
+      >
         <div class="p-6">
-          <h5 class="mb-2 text-xl font-medium leading-tight ">
+          <h5 class="mb-2 text-xl font-medium leading-tight">
             {bank.name}
           </h5>
-          <p class="mb-4 text-base ">
+          <p class="mb-4 text-base">
             {bank.address}
           </p>
         </div>
         <div
-          class="border-t-2 border-neutral-100 px-6 py-3 text-surface/75 dark:border-white/10 dark:text-neutral-300">
+          class="border-t-2 border-neutral-100 px-6 py-3 text-surface/75 dark:border-white/10 dark:text-neutral-300"
+        >
           {bank.city}, {bank.state}
           {bank.contact}
+
+          <Link to={`/banks/${bank.id}`} class="text-cyan-700 hover:text-cyan-800 underline">
+            View Details
+          </Link>
         </div>
       </div>
     {/each}
