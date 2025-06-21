@@ -8,6 +8,7 @@ import swaggerUi from 'swagger-ui-express'
 import swaggerJSDoc from 'swagger-jsdoc'
 import { notFound, errorHandler } from './middleware/Error.js'
 import connectDB from './config/db.js'
+import { client, redisConnect } from './config/connectRedis.js'
 
 import userRoutes from './routes/UserRoutes.js'
 import bankRoutes from './routes/BankRoutes.js'
@@ -15,6 +16,7 @@ import bankRoutes from './routes/BankRoutes.js'
 dotenv.config()
 
 connectDB()
+redisConnect()
 
 const app = express()
 
@@ -51,6 +53,14 @@ const swaggerDocs = swaggerJSDoc(swaggerOptions)
 app.use('/api/users', userRoutes)
 app.use('/api/banks', bankRoutes)
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
+
+app.get('/store/:name', (req, res) => {
+  // get name from the request and store in redis
+
+  const { name } = req.params
+  client.set(req.params.name, name)
+  res.send('name stored in redis')
+})
 
  // Apply CORS middleware to all routes
 

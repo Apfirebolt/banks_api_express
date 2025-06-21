@@ -1,8 +1,8 @@
 import fs from 'fs';
 import { parse } from 'csv-parse';
 import dotenv from 'dotenv';
-import Bank from "./models/Bank.js";
-import connectDB from "./config/db.js";
+import Bank from "../models/Bank.js";
+import connectDB from "../config/db.js";
 
 dotenv.config();
 

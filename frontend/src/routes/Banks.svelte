@@ -166,13 +166,21 @@ import httpClient from "../plugins/interceptor";
   </div>
   <div class="grid grid-cols-2 gap-4 container mx-auto">
     {#each banks as bank}
-      <div class="container mx-auto bg-cyan-700 px-2 py-4 text-white">
-        <h3 class="bg-blue-900 px-2 py-3 my-2">{bank.name}</h3>
-        <p>{bank.address}</p>
-        <p class="bg-blue-900 px-2 py-3 my-2">
+      <div
+        class="block rounded-lg bg-neutral-100 text-center text-surface shadow-secondary-1 dark:bg-surface-dark dark:text-white">
+        <div class="p-6">
+          <h5 class="mb-2 text-xl font-medium leading-tight ">
+            {bank.name}
+          </h5>
+          <p class="mb-4 text-base ">
+            {bank.address}
+          </p>
+        </div>
+        <div
+          class="border-t-2 border-neutral-100 px-6 py-3 text-surface/75 dark:border-white/10 dark:text-neutral-300">
           {bank.city}, {bank.state}
           {bank.contact}
-        </p>
+        </div>
       </div>
     {/each}
   </div>
